@@ -1,0 +1,76 @@
+<html>
+<head>
+</head>
+<body>
+<canvas id="myCanvas" onclick="myCanvas()" width="400" height="350"
+style="border:1px solid #000000;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<script>
+var canvas = document.getElementById('myCanvas'),
+context = canvas.getContext('2d');
+
+image = new Image();
+image.src = 'jungle.jpg';
+
+image1 = new Image();
+image1.src = 'jungle.jpg';
+
+rayman = new Image();
+rayman.src = 'rayman.png';
+
+posY = 0;
+posY1 = 400;
+posRayman = -400;
+
+window.addEventListener('load', render);
+var fps = 55;
+var now;
+var then = Date.now();
+var interval = 1000/fps;
+var delta;
+function render(){
+	requestAnimationFrame(render);
+	now = Date.now();
+    delta = now - then;
+     
+    if (delta > interval) {
+	then = now - (delta % interval);
+	update();
+	  draw();
+	  }
+}
+
+function update()
+{
+	posY = posY - 2;
+	posY1 = posY1 - 2;
+	posRayman = posRayman + 4;
+	if(posY == -400)
+	{
+		posY = 400;
+	}
+	if(posY1 == -400)
+	{
+		posY1 = 400;
+	}
+	if(posRayman == 400)
+	{
+		posRayman = -400;
+	}
+}
+	  
+function draw()
+{
+	context.clearRect ( 0 , 0 , canvas.width, canvas.height );
+ context.drawImage(image,0,posY);
+ context.drawImage(image1,0,posY1);
+ context.drawImage(rayman,100,posRayman,200,100);
+}
+
+
+</script>
+
+</body>
+</html>
